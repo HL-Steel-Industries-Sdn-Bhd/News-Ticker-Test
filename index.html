@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CSS 跑馬燈示例</title>
+<style>
+  :root{--duration: 12s}
+  .marquee-wrap{
+    overflow: hidden;
+    white-space: nowrap;
+    background:#111;
+    color:#fff;
+    padding:12px 0;
+    font-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  .marquee{
+    display:inline-block;
+    padding-left:100%;
+    animation: scroll var(--duration) linear infinite;
+    will-change: transform;
+  }
+  @keyframes scroll{
+    from { transform: translateX(0); }
+    to   { transform: translateX(-100%); }
+  }
+
+  /* hover 或 focus 時暫停 */
+  .marquee-wrap:hover .marquee,
+  .marquee-wrap:focus-within .marquee{
+    animation-play-state: paused;
+  }
+
+  /* 如果用戶偏好減少動態效果，減少或停止動畫 */
+  @media (prefers-reduced-motion: reduce){
+    .marquee{ animation: none; transform: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="marquee-wrap" tabindex="0" aria-label="最新消息跑馬燈">
+    <div class="marquee" aria-live="polite">
+      🔔 本公司 12/10 有系統維護公告 — 請提前存檔。　•　🎉 年終聚餐 12/20 備註已上傳表單。　•　📣 新功能上線：自動備份每晚 02:00。
+    </div>
+  </div>
+</body>
+</html>
